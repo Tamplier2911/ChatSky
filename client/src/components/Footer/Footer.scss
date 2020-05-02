@@ -1,0 +1,43 @@
+.footer {
+  grid-column: full-start / full-end;
+  height: 6rem;
+  box-shadow: 0rem 0rem 0.4rem var(--cl-shadow);
+
+  & > div {
+    height: 100%;
+    align-content: center;
+    display: flex;
+    justify-content: center;
+    background-color: #fff;
+  }
+
+  .MuiBottomNavigation-root:not(:last-child) {
+    margin-right: 2rem;
+  }
+
+  &__button {
+    padding: 0 !important;
+
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+
+  &__button:hover .footer__icon {
+    color: var(--cl-primary);
+  }
+
+  &__icon {
+    padding-top: 0.2rem;
+    font-size: 4rem !important;
+    transition: color 0.3s !important;
+
+    @media only screen and (max-width: 360px) {
+      font-size: 3rem !important;
+    }
+
+    &:hover {
+      color: var(--cl-primary);
+    }
+  }
+}
