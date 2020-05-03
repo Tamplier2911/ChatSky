@@ -1,23 +1,21 @@
 import "./LoginForm.scss";
 import React, { useState } from "react";
 
-// // fb
-// import firebase from "../../utils/firebaseConfig";
-// firebase.auth().createUserWithEmailAndPassword(email, password);
-
-// DO LOGIN AND SIGN UP BASED ON REFERENCE CRWN CLOTHIN
+// redux
+import { connect } from "react-redux";
+import { createStructuredSelector } from "reselect";
+import { selectUserLoading } from "../../redux/user/user.selectors";
+import { emailSignInStart } from "../../redux/user/user.actions";
 
 // mui
 import { TextField, Typography, Button } from "@material-ui/core";
 
-const LoginForm = () => {
+const LoginForm = ({ emailSignInStart, loading }) => {
   const [userCredentials, setUserCredentials] = useState({
     email: "",
     password: "",
   });
   const { email, password } = userCredentials;
-
-  console.log(email, password);
 
   const onInputChange = (e) => {
     const { name, value } = e.target;
@@ -26,7 +24,14 @@ const LoginForm = () => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    console.log(userCredentials);
+    if (!email.length || !password.length) {
+      return alert("Please, enter email and password");
+    }
+    emailSignInStart(userCredentials);
+    setUserCredentials({
+      email: "",
+      password: "",
+    });
   };
 
   return (
@@ -57,12 +62,22 @@ const LoginForm = () => {
           onChange={(e) => onInputChange(e)}
           className="loginForm__input"
         />
-        <Button color="primary" className="loginForm__button" type="submit">
-          Log In
-        </Button>
+        {!loading ? (
+          <Button color="primary" className="loginForm__button" type="submit">
+            Log In
+          </Button>
+        ) : (
+          <Button disabled className="loginForm__button">
+            Processing...
+          </Button>
+        )}
       </form>
     </div>
   );
 };
 
-export default LoginForm;
+const mapStateToProps = createStructuredSelector({
+  loading: selectUserLoading,
+});
+
+export default connect(mapStateToProps, { emailSignInStart })(LoginForm);
