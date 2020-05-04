@@ -35,6 +35,9 @@ const Footer = ({ history, user, signUserOutStart }) => {
           label="Apps"
           value="apps"
           className="footer__button"
+          onClick={() => {
+            history.push("/rest");
+          }}
           icon={<AppsRoundedIcon className="footer__icon" />}
         />
         {user ? (
@@ -64,6 +67,9 @@ const Footer = ({ history, user, signUserOutStart }) => {
           label="Chat"
           value="chat"
           className="footer__button"
+          onClick={() => {
+            history.push("/chat");
+          }}
           icon={<ChatBubbleOutlineRoundedIcon className="footer__icon" />}
         />
       </BottomNavigation>

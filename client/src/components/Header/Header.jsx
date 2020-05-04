@@ -1,11 +1,15 @@
 import "./Header.scss";
 import React from "react";
 
-import { AppBar, Toolbar, IconButton, Typography } from "@material-ui/core";
+// redux
+import { connect } from "react-redux";
+import { toggleSidenav } from "../../redux/sidenav/sidenav.actions";
 
+// mui
+import { AppBar, Toolbar, IconButton, Typography } from "@material-ui/core";
 import MenuRoundedIcon from "@material-ui/icons/MenuRounded";
 
-const Header = () => {
+const Header = ({ toggleSidenav }) => {
   return (
     <AppBar position="static" className="header">
       <Toolbar>
@@ -14,6 +18,7 @@ const Header = () => {
           color="inherit"
           aria-label="menu"
           className="header__button"
+          onClick={() => toggleSidenav()}
         >
           <MenuRoundedIcon className="header__icon" />
         </IconButton>
@@ -25,4 +30,4 @@ const Header = () => {
   );
 };
 
-export default Header;
+export default connect(null, { toggleSidenav })(Header);

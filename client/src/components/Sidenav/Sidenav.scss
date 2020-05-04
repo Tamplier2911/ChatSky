@@ -1,0 +1,103 @@
+.sidenav {
+  position: fixed;
+  z-index: 1150;
+  width: 100vw;
+  height: 100vh;
+  background-color: var(--cl-shadow);
+
+  &__box {
+    width: 25rem;
+    height: 100vh;
+    padding: 2rem;
+    animation: slideIn 0.5s;
+    background-color: var(--cl-white);
+  }
+
+  &__content {
+    display: grid;
+    grid-row-gap: 2rem;
+    justify-items: center;
+    animation: fadeIn 1s 0.5s;
+    animation-fill-mode: backwards;
+
+    &--userData {
+      display: grid;
+      grid-row-gap: 0.5rem;
+      justify-items: center;
+    }
+
+    &--imgWrap {
+      width: 8rem;
+      height: 8rem;
+      border-radius: 50%;
+      overflow: hidden;
+    }
+
+    &--img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+    }
+
+    &--name {
+      width: 100%;
+      text-align: center;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
+    }
+
+    &--email {
+      width: 100%;
+      text-align: center;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
+    }
+
+    &--ul {
+      display: grid;
+      grid-row-gap: 1rem;
+      list-style: none;
+    }
+
+    &--li {
+      text-align: center;
+    }
+
+    &--link {
+      &:link,
+      &:visited {
+        text-decoration: none;
+        font-size: 1.7rem;
+        font-weight: bold;
+        color: var(--cl-primary);
+        transition: color 0.3s;
+      }
+
+      &:hover,
+      &:active {
+        color: var(--cl-secondary);
+      }
+    }
+  }
+}
+
+@keyframes slideIn {
+  0% {
+    width: 0;
+  }
+  100% {
+    width: 25rem;
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
