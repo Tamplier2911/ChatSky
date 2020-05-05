@@ -1,0 +1,28 @@
+.channelForm {
+  display: grid;
+  grid-row-gap: 1rem;
+  grid-auto-rows: min-content;
+
+  &__form {
+    display: grid;
+    grid-auto-rows: min-content;
+    grid-row-gap: 1rem;
+  }
+
+  &__input {
+    display: grid !important;
+
+    & label {
+      font-size: 1.5rem !important;
+      top: -0.4rem !important;
+    }
+
+    & input {
+      font-size: 1.5rem !important;
+    }
+  }
+
+  &__btn {
+    font-size: 1.6rem !important;
+  }
+}

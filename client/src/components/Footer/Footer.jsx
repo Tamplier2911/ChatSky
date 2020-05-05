@@ -36,7 +36,7 @@ const Footer = ({ history, user, signUserOutStart }) => {
           value="apps"
           className="footer__button"
           onClick={() => {
-            history.push("/rest");
+            history.push("/channels");
           }}
           icon={<AppsRoundedIcon className="footer__icon" />}
         />

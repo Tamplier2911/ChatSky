@@ -12,12 +12,13 @@ import { checkUserSessionStart } from "./redux/user/user.actions";
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
 import Sidenav from "./components/Sidenav/Sidenav";
+import Modal from "./components/Modal/Modal";
 
 // pages
 import HomePage from "./pages/HomePage/HomePage";
 import AuthPage from "./pages/AuthPage/AuthPage";
 import ChatPage from "./pages/ChatPage/ChatPage";
-import RestPage from "./pages/RestPage/RestPage";
+import ChannelsPage from "./pages/ChannelsPage/ChannelsPage.jsx";
 
 function App({ checkUserSessionStart, user }) {
   useEffect(() => {
@@ -27,6 +28,7 @@ function App({ checkUserSessionStart, user }) {
     <div className="container">
       <Header />
       <Sidenav />
+      <Modal />
       <main className="main">
         <Switch>
           <Route
@@ -35,7 +37,7 @@ function App({ checkUserSessionStart, user }) {
             render={() => (user ? <Redirect to="/" /> : <AuthPage />)}
           />
           <Route exact path="/chat" component={ChatPage} />
-          <Route exact path="/rest" component={RestPage} />
+          <Route exact path="/channels" component={ChannelsPage} />
           <Route exact path="/" component={HomePage} />
         </Switch>
       </main>

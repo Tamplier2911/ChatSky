@@ -15,6 +15,7 @@ const Sidenav = ({ hidden, toggleSidenav, user, signUserOutStart }) => {
   const { displayName, email, photoURL } = user ? user : {};
   const links = [
     { name: "Home", path: "/", action: (e) => toggleSidenav() },
+    { name: "Channels", path: "/channels", action: (e) => toggleSidenav() },
     { name: "Chat", path: "/chat", action: (e) => toggleSidenav() },
   ];
   if (user)
