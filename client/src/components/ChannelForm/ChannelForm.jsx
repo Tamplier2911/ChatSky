@@ -5,12 +5,13 @@ import React, { useState } from "react";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
 import { selectIsLoading } from "../../redux/channels/channels.selectors";
+import { selectCurrentUser } from "../../redux/user/user.selectors";
 import { createNewChannelStart } from "../../redux/channels/channels.actions";
 
 // mui
 import { TextField, Button } from "@material-ui/core";
 
-const ChannelForm = ({ isLoading, createNewChannelStart }) => {
+const ChannelForm = ({ isLoading, createNewChannelStart, user }) => {
   const [channelData, setChannelData] = useState({ name: "", desc: "" });
   const { name, desc } = channelData;
 
@@ -21,7 +22,8 @@ const ChannelForm = ({ isLoading, createNewChannelStart }) => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    createNewChannelStart(channelData);
+    createNewChannelStart({ channelData, user });
+    setChannelData({ name: "", desc: "" });
   };
 
   return (
@@ -67,6 +69,7 @@ const ChannelForm = ({ isLoading, createNewChannelStart }) => {
 
 const mapStateToProps = createStructuredSelector({
   isLoading: selectIsLoading,
+  user: selectCurrentUser,
 });
 
 export default connect(mapStateToProps, { createNewChannelStart })(ChannelForm);

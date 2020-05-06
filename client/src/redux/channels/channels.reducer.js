@@ -6,10 +6,12 @@ const {
   LOAD_ALL_CHANNELS_START,
   LOAD_ALL_CHANNELS_SUCCESS,
   LOAD_ALL_CHANNELS_FAILURE,
+  SET_CURRENT_CHANNEL,
 } = channelsTypes;
 
 const INITIAL_STATE = {
   allChannels: [],
+  currentChannel: {},
   isLoading: false,
   errorMessage: "",
 };
@@ -26,6 +28,8 @@ const channelsReducer = (state = INITIAL_STATE, action) => {
     case CREATE_NEW_CHANNEL_FAILURE:
     case LOAD_ALL_CHANNELS_FAILURE:
       return { ...state, errorMessage: action.payload, isLoading: false };
+    case SET_CURRENT_CHANNEL:
+      return { ...state, currentChannel: action.payload };
     default:
       return state;
   }

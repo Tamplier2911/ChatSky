@@ -53,11 +53,10 @@ const Sidenav = ({ hidden, toggleSidenav, user, signUserOutStart }) => {
               {links.map((link, i) => {
                 const { name, path, action } = link;
                 return (
-                  <li className="sidenav__content--li">
+                  <li className="sidenav__content--li" key={`${name}-${i}`}>
                     <Link
                       to={path}
                       onClick={(e) => action(e)}
-                      key={`${name}-${i}`}
                       className="sidenav__content--link"
                     >
                       {name}

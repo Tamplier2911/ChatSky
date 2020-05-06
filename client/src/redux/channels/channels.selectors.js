@@ -11,3 +11,8 @@ export const selectAllChannels = createSelector(
   [selectChannels],
   (channels) => channels.allChannels
 );
+
+export const selectCurrentChannel = createSelector(
+  [selectChannels],
+  (channels) => channels.currentChannel
+);

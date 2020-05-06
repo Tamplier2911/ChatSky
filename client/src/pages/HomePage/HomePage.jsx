@@ -1,10 +1,13 @@
 import "./HomePage.scss";
 import React from "react";
 
+// components
+import Logo from "../../components/Logo/Logo";
+
 const HomePage = () => {
   return (
-    <div>
-      <div>Home Page</div>
+    <div className="homePage">
+      <Logo size="home" />
     </div>
   );
 };

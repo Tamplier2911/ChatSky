@@ -17,11 +17,52 @@ const firebaseConfig = {
 
 firebase.initializeApp(firebaseConfig);
 
+export const createChannelInDB = async (channelData) => {
+  // destructure required values from channel data object
+  const { createdBy, name, desc } = channelData;
+
+  // get channels collection ref
+  const channelsRef = firebase.database().ref("channels");
+
+  // key
+  const key = channelsRef.push().key;
+
+  // create channel object
+  const newChannel = {
+    id: key,
+    name: name,
+    description: desc,
+    createdBy: createdBy,
+  };
+
+  // write new document into channels collection
+  await channelsRef.child(key).update(newChannel);
+};
+
+export const loadAllChannelsFromDB = async () => {
+  // define collection to store results
+  const data = [];
+
+  // get channels collection ref
+  const channelsRef = firebase.database().ref("channels");
+
+  // promisify on child_added - return fulfilled data
+  return new Promise((resolve, rejsect) => {
+    channelsRef.on("child_added", (snap) => {
+      data.push(snap.val());
+      resolve(data);
+    });
+  });
+};
+
 export const saveUserToDB = async (createdUser) => {
+  // desctructure required values from user object
   const { uid, email, photoURL, displayName } = createdUser;
 
+  // get user collection ref
   const usersRef = firebase.database().ref("users");
 
+  // write document into user collection
   await usersRef.child(uid).set({
     name: displayName,
     email: email,

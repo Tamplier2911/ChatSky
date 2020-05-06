@@ -28,6 +28,8 @@
 }
 
 .main {
+  display: grid;
+  // align-items: center;
   grid-column: center-start / center-end;
   min-height: calc(100vh - 6rem - 6rem);
 }

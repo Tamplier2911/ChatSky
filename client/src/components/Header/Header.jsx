@@ -5,6 +5,9 @@ import React from "react";
 import { connect } from "react-redux";
 import { toggleSidenav } from "../../redux/sidenav/sidenav.actions";
 
+// components
+import Logo from "../Logo/Logo";
+
 // mui
 import { AppBar, Toolbar, IconButton, Typography } from "@material-ui/core";
 import MenuRoundedIcon from "@material-ui/icons/MenuRounded";
@@ -23,7 +26,7 @@ const Header = ({ toggleSidenav }) => {
           <MenuRoundedIcon className="header__icon" />
         </IconButton>
         <Typography variant="h6" className="header__logo">
-          ChatSky
+          <Logo />
         </Typography>
       </Toolbar>
     </AppBar>

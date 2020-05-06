@@ -7,6 +7,7 @@ const {
   LOAD_ALL_CHANNELS_START,
   LOAD_ALL_CHANNELS_SUCCESS,
   LOAD_ALL_CHANNELS_FAILURE,
+  SET_CURRENT_CHANNEL,
 } = channelsTypes;
 
 export const createNewChannelStart = (channelData) => ({
@@ -35,4 +36,9 @@ export const loadAllChannelsSuccess = (channels) => ({
 export const loadAllChannelsFailure = (errorMessage) => ({
   type: LOAD_ALL_CHANNELS_FAILURE,
   payload: errorMessage,
+});
+
+export const setCurrentChannel = (channel) => ({
+  type: SET_CURRENT_CHANNEL,
+  payload: channel,
 });

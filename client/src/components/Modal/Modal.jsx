@@ -26,7 +26,6 @@ const Modal = ({ hidden, content, closeModal }) => {
           </span>
           <h3 className="modal__content--title">{title}</h3>
           <p className="modal__content--text">{text}</p>
-          {/* {child.WrappedComponent ? child.WrappedComponent() : null} */}
           {child === "channel-form" ? <ChannelForm /> : null}
         </div>
       </div>
