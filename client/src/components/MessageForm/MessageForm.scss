@@ -1,0 +1,41 @@
+/*
+
+.messageForm {
+  display: grid;
+  grid-row-gap: 1rem;
+  grid-auto-rows: min-content;
+  align-content: center;
+  padding: 0 2rem;
+
+  &__form {
+    display: grid;
+    grid-template-columns: min-content 1fr min-content;
+    grid-auto-rows: min-content;
+    grid-row-gap: 1rem;
+    align-items: center;
+  }
+
+  &__input {
+    display: grid !important;
+
+    & label {
+      font-size: 1.5rem !important;
+      top: -0.4rem !important;
+    }
+
+    & input {
+      font-size: 1.5rem !important;
+    }
+  }
+
+  &__button {
+    font-size: 1.6rem !important;
+
+    & span svg {
+      width: 3rem;
+      height: 3rem;
+    }
+  }
+}
+
+*/
