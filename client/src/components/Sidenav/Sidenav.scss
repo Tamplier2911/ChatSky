@@ -1,3 +1,5 @@
+/*
+
 .sidenav {
   position: fixed;
   z-index: 1150;
@@ -17,7 +19,7 @@
     display: grid;
     grid-row-gap: 2rem;
     justify-items: center;
-    animation: fadeIn 1s 0.5s;
+    animation: fadeIn 0.5s 0.25s;
     animation-fill-mode: backwards;
 
     &--userData {
@@ -71,7 +73,7 @@
       &:visited {
         text-decoration: none;
         font-size: 1.7rem;
-        font-weight: bold;
+        font-weight: 600;
         color: var(--cl-primary);
         transition: color 0.3s;
       }
@@ -101,3 +103,5 @@
     opacity: 1;
   }
 }
+
+*/

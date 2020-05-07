@@ -5,7 +5,7 @@ import { ReactComponent as LinkSVG } from "../../assets/svg/tools-and-utensils.s
 
 const getActiveBorder = ({ active }) => {
   if (active) {
-    return `border: solid 0.1rem var(--cl-secondary);`;
+    return `border: solid 0.1rem var(--cl-secondary); fill: var(--cl-secondary);`;
   }
   return `border: solid 0.1rem var(--cl-primary);`;
 };
@@ -43,8 +43,8 @@ export const ChannelDesc = styled.div`
 `;
 
 export const ChannelSVG = styled(LinkSVG)`
-  width: 2rem;
-  height: 2rem;
+  width: 3rem;
+  height: 3rem;
   transition: fill 0.3s;
 
   &:hover {

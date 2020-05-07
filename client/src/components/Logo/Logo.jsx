@@ -1,9 +1,6 @@
 // import "./Logo.scss";
 import React from "react";
 
-// svg
-// import { ReactComponent as LogoSVG } from "../../assets/svg/weather.svg";
-
 // js rendering css
 import {
   LogoContainer,

@@ -17,7 +17,7 @@ import {
 } from "./ChannelStyles";
 
 const Channel = ({ channel, setCurrentChannel, currentChannel }) => {
-  const { name, description, createdBy } = channel;
+  const { name, description } = channel; // createdBy desctuct
   const active = channel.id === currentChannel.id;
   return (
     <ChannelContainer active={active}>

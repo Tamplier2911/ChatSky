@@ -7,8 +7,14 @@ import { createStructuredSelector } from "reselect";
 import { selectUserLoading } from "../../redux/user/user.selectors";
 import { emailSignInStart } from "../../redux/user/user.actions";
 
-// mui
-import { TextField, Typography, Button } from "@material-ui/core";
+// js render css
+import {
+  LoginFormContainer,
+  LoginFormElement,
+  LoginFormTitle,
+  LoginFormInput,
+  LoginFormButton,
+} from "./LoginFormStyles";
 
 const LoginForm = ({ emailSignInStart, loading }) => {
   const [userCredentials, setUserCredentials] = useState({
@@ -35,14 +41,10 @@ const LoginForm = ({ emailSignInStart, loading }) => {
   };
 
   return (
-    <div className="loginForm">
-      <Typography variant="h4">I already have an account:</Typography>
-      <form
-        autoComplete="off"
-        onSubmit={(e) => onSubmit(e)}
-        className="loginForm__form"
-      >
-        <TextField
+    <LoginFormContainer>
+      <LoginFormTitle variant="h4">I already have an account:</LoginFormTitle>
+      <LoginFormElement autoComplete="off" onSubmit={(e) => onSubmit(e)}>
+        <LoginFormInput
           id="login-email"
           label="Email"
           required
@@ -50,9 +52,8 @@ const LoginForm = ({ emailSignInStart, loading }) => {
           name="email"
           value={email}
           onChange={(e) => onInputChange(e)}
-          className="loginForm__input"
         />
-        <TextField
+        <LoginFormInput
           id="login-password"
           label="Password"
           required
@@ -60,19 +61,16 @@ const LoginForm = ({ emailSignInStart, loading }) => {
           name="password"
           value={password}
           onChange={(e) => onInputChange(e)}
-          className="loginForm__input"
         />
         {!loading ? (
-          <Button color="primary" className="loginForm__button" type="submit">
+          <LoginFormButton color="primary" type="submit">
             Log In
-          </Button>
+          </LoginFormButton>
         ) : (
-          <Button disabled className="loginForm__button">
-            Processing...
-          </Button>
+          <LoginFormButton disabled>Processing...</LoginFormButton>
         )}
-      </form>
-    </div>
+      </LoginFormElement>
+    </LoginFormContainer>
   );
 };
 

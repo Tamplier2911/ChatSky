@@ -1,4 +1,4 @@
-import "./Footer.scss";
+// import "./Footer.scss";
 import React from "react";
 import { withRouter } from "react-router-dom";
 
@@ -8,72 +8,70 @@ import { createStructuredSelector } from "reselect";
 import { selectCurrentUser } from "../../redux/user/user.selectors";
 import { signUserOutStart } from "../../redux/user/user.actions";
 
-// mui
-import { BottomNavigation, BottomNavigationAction } from "@material-ui/core";
+// js render css
+import {
+  FooterContainer,
+  FooterNavHomeIcon,
+  FooterNavChannelsIcon,
+  FooterNavAuthIcon,
+  FooterNavLogoutIcon,
+  FooterNavChatIcon,
+  FooterNavigation,
+  FooterNavAction,
+} from "./FooterStyles";
 
-// mico
-import HomeRoundedIcon from "@material-ui/icons/HomeRounded";
-import AppsRoundedIcon from "@material-ui/icons/AppsRounded";
-import HowToRegRoundedIcon from "@material-ui/icons/HowToRegRounded";
-import PersonAddDisabledRoundedIcon from "@material-ui/icons/PersonAddDisabledRounded";
-import ChatBubbleOutlineRoundedIcon from "@material-ui/icons/ChatBubbleOutlineRounded";
-
-const Footer = ({ history, user, signUserOutStart }) => {
+const Footer = ({ location, history, user, signUserOutStart }) => {
+  const path = location.pathname.slice(1);
   return (
-    <footer className="footer">
-      <BottomNavigation>
-        <BottomNavigationAction
+    <FooterContainer>
+      <FooterNavigation>
+        <FooterNavAction
           label="Home"
           value="home"
-          className="footer__button"
           onClick={() => {
             history.push("/");
           }}
-          icon={<HomeRoundedIcon className="footer__icon" />}
+          icon={<FooterNavHomeIcon path={path} />}
         />
-        <BottomNavigationAction
-          label="Apps"
-          value="apps"
-          className="footer__button"
+        <FooterNavAction
+          label="Channels"
+          value="channels"
           onClick={() => {
             history.push("/channels");
           }}
-          icon={<AppsRoundedIcon className="footer__icon" />}
+          icon={<FooterNavChannelsIcon path={path} />}
         />
         {user ? (
-          <BottomNavigationAction
+          <FooterNavAction
             label="Logout"
             value="logout"
-            className="footer__button"
             onClick={(e) => {
               e.preventDefault();
               signUserOutStart();
             }}
-            icon={<PersonAddDisabledRoundedIcon className="footer__icon" />}
+            icon={<FooterNavLogoutIcon />}
           />
         ) : (
-          <BottomNavigationAction
-            label="User"
-            value="user"
-            className="footer__button"
+          <FooterNavAction
+            label="Login"
+            value="login"
             onClick={() => {
               history.push("/auth");
             }}
-            icon={<HowToRegRoundedIcon className="footer__icon" />}
+            icon={<FooterNavAuthIcon path={path} />}
           />
         )}
 
-        <BottomNavigationAction
+        <FooterNavAction
           label="Chat"
           value="chat"
-          className="footer__button"
           onClick={() => {
             history.push("/chat");
           }}
-          icon={<ChatBubbleOutlineRoundedIcon className="footer__icon" />}
+          icon={<FooterNavChatIcon path={path} />}
         />
-      </BottomNavigation>
-    </footer>
+      </FooterNavigation>
+    </FooterContainer>
   );
 };
 

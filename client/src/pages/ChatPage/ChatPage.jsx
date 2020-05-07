@@ -1,11 +1,14 @@
-import "./ChatPage.scss";
+// import "./ChatPage.scss";
 import React from "react";
+
+// js rendering css
+import { ChatPageContainer } from "./ChatPageStyles";
 
 const ChatPage = () => {
   return (
-    <div>
+    <ChatPageContainer>
       <div>Chat Page</div>
-    </div>
+    </ChatPageContainer>
   );
 };
 

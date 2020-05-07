@@ -1,6 +1,6 @@
-/*
+import styled from "styled-components";
 
-.container {
+export const AppContainer = styled.div`
   position: relative;
   display: grid;
   grid-template-rows: 1fr;
@@ -27,13 +27,11 @@
       minmax(2rem, 1fr)
       [full-end];
   }
-}
+`;
 
-.main {
+export const AppMain = styled.main`
   display: grid;
   // align-items: center;
   grid-column: center-start / center-end;
   min-height: calc(100vh - 6rem - 6rem);
-}
-
-*/
+`;

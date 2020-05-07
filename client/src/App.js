@@ -1,4 +1,4 @@
-import "./App.scss";
+// import "./App.scss";
 import React, { useEffect } from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
 
@@ -20,29 +20,40 @@ import AuthPage from "./pages/AuthPage/AuthPage";
 import ChatPage from "./pages/ChatPage/ChatPage";
 import ChannelsPage from "./pages/ChannelsPage/ChannelsPage.jsx";
 
+// js render css
+import { AppContainer, AppMain } from "./AppStyles";
+
 function App({ checkUserSessionStart, user }) {
   useEffect(() => {
     checkUserSessionStart();
   }, [checkUserSessionStart]);
   return (
-    <div className="container">
+    <AppContainer>
       <Header />
       <Sidenav />
       <Modal />
-      <main className="main">
+      <AppMain>
         <Switch>
           <Route
             exact
             path="/auth"
             render={() => (user ? <Redirect to="/" /> : <AuthPage />)}
           />
-          <Route exact path="/chat" component={ChatPage} />
-          <Route exact path="/channels" component={ChannelsPage} />
+          <Route
+            exact
+            path="/chat"
+            render={() => (user ? <ChatPage /> : <AuthPage />)}
+          />
+          <Route
+            exact
+            path="/channels"
+            render={() => (user ? <ChannelsPage /> : <AuthPage />)}
+          />
           <Route exact path="/" component={HomePage} />
         </Switch>
-      </main>
+      </AppMain>
       <Footer />
-    </div>
+    </AppContainer>
   );
 }
 

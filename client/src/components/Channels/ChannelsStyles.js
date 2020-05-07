@@ -14,7 +14,7 @@ const getPositioning = ({ pos }) => {
 export const ChannelsContainer = styled.div`
   display: grid;
   grid-auto-rows: min-content;
-  grid-row-gap: 1rem;
+  grid-row-gap: 2rem;
   ${getPositioning}
 `;
 

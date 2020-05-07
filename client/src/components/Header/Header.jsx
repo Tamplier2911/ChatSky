@@ -1,4 +1,4 @@
-import "./Header.scss";
+// import "./Header.scss";
 import React from "react";
 
 // redux
@@ -8,28 +8,32 @@ import { toggleSidenav } from "../../redux/sidenav/sidenav.actions";
 // components
 import Logo from "../Logo/Logo";
 
-// mui
-import { AppBar, Toolbar, IconButton, Typography } from "@material-ui/core";
-import MenuRoundedIcon from "@material-ui/icons/MenuRounded";
+// js render css
+import {
+  HeaderContainer,
+  HeaderContent,
+  HeaderNavButton,
+  HeaderMenuIcon,
+  HeaderText,
+} from "./HeaderStyles";
 
 const Header = ({ toggleSidenav }) => {
   return (
-    <AppBar position="static" className="header">
-      <Toolbar>
-        <IconButton
+    <HeaderContainer position="static">
+      <HeaderContent>
+        <HeaderNavButton
           edge="start"
           color="inherit"
           aria-label="menu"
-          className="header__button"
           onClick={() => toggleSidenav()}
         >
-          <MenuRoundedIcon className="header__icon" />
-        </IconButton>
-        <Typography variant="h6" className="header__logo">
+          <HeaderMenuIcon />
+        </HeaderNavButton>
+        <HeaderText variant="h6">
           <Logo />
-        </Typography>
-      </Toolbar>
-    </AppBar>
+        </HeaderText>
+      </HeaderContent>
+    </HeaderContainer>
   );
 };
 
