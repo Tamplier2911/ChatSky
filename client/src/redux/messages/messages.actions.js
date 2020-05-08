@@ -23,8 +23,9 @@ export const createOneMessageFailure = (errMessage) => ({
   payload: errMessage,
 });
 
-export const loadAllMessagesStart = () => ({
+export const loadAllMessagesStart = (channelId) => ({
   type: LOAD_ALL_MESSAGES_START,
+  payload: channelId,
 });
 
 export const loadAllMessagesSuccess = (messages) => ({

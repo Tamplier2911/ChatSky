@@ -5,6 +5,7 @@ import React, { useState } from "react";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
 import { selectCurrentUser } from "../../redux/user/user.selectors";
+import { selectIsLoading } from "../../redux/messages/messages.selectors";
 import { selectCurrentChannel } from "../../redux/channels/channels.selectors";
 import { createOneMessageStart } from "../../redux/messages/messages.actions";
 
@@ -22,7 +23,7 @@ import {
   MessageFormSendIcon,
 } from "./MessageFormStyles";
 
-const MessageForm = ({ user, channel, createOneMessageStart }) => {
+const MessageForm = ({ user, channel, createOneMessageStart, isLoading }) => {
   const [messageContent, setMessageContent] = useState({
     content: "",
     media: null,
@@ -38,6 +39,7 @@ const MessageForm = ({ user, channel, createOneMessageStart }) => {
 
   const onSubmit = (e) => {
     e.preventDefault();
+    console.log("clicked!");
     createOneMessageStart({ messageContent, user, channel });
     setMessageContent({
       content: "",
@@ -76,6 +78,7 @@ const MessageForm = ({ user, channel, createOneMessageStart }) => {
           aria-label="upload picture"
           component="button"
           type="submit"
+          {...(isLoading ? { disabled: true } : null)}
         >
           <MessageFormSendIcon />
         </MessageFormButton>
@@ -87,6 +90,7 @@ const MessageForm = ({ user, channel, createOneMessageStart }) => {
 const mapStateToProps = createStructuredSelector({
   user: selectCurrentUser,
   channel: selectCurrentChannel,
+  isLoading: selectIsLoading,
 });
 
 export default connect(mapStateToProps, { createOneMessageStart })(MessageForm);

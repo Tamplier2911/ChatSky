@@ -1,8 +1,14 @@
 import { takeLatest, all, call, put } from "redux-saga/effects";
 
 import {
+  createMessageInDB,
+  loadAllMessagesFromDB,
+} from "../../utils/firebaseConfig";
+
+import {
   createOneMessageSuccess,
   createOneMessageFailure,
+  loadAllMessagesStart,
   loadAllMessagesSuccess,
   loadAllMessagesFailure,
 } from "./messages.actions";
@@ -10,28 +16,24 @@ import {
 import messagesTypes from "./messages.types";
 const { CREATE_ONE_MESSAGE_START, LOAD_ALL_MESSAGES_START } = messagesTypes;
 
-// channelID
-//     messageID
-//         content "hello"
-//         timestamp 15.05.2020
-//         user {
-//             id
-//             displayname
-//             avatar
-//         }
-
 export function* createOneMessage(action) {
-  console.log(action);
   const { user, channel, messageContent } = action.payload;
-  console.log(user, channel, messageContent, "from saga");
   try {
-  } catch (err) {}
+    yield call(createMessageInDB, { user, channel, messageContent });
+    yield put(createOneMessageSuccess());
+    yield put(loadAllMessagesStart());
+  } catch (err) {
+    yield put(createOneMessageFailure(err.message));
+  }
 }
 
-export function* loadAllMessages() {
-  console.log("from saga");
+export function* loadAllMessages(action) {
   try {
-  } catch (err) {}
+    const res = yield call(loadAllMessagesFromDB, action.payload);
+    yield put(loadAllMessagesSuccess(res));
+  } catch (err) {
+    yield put(loadAllMessagesFailure(err.message));
+  }
 }
 
 export function* onCreateOneMessageStart() {

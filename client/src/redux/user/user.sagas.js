@@ -14,6 +14,8 @@ import {
   checkUserSessionFailure,
 } from "./user.actions";
 
+import { loadAllChannelsStart } from "../channels/channels.actions";
+
 import userActionTypes from "./user.types";
 const {
   FORM_SIGN_UP_START,
@@ -81,6 +83,7 @@ export function* checkUserSession() {
     } else {
       const { uid, email, displayName, photoURL } = userAuth;
       yield put(checkUserSessionSuccess({ uid, email, displayName, photoURL }));
+      yield put(loadAllChannelsStart());
     }
   } catch (err) {
     yield put(checkUserSessionFailure(err.message));

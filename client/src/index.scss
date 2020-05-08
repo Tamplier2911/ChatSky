@@ -13,6 +13,7 @@
 
   --cl-font: #393939;
   --cl-white: #ffffff;
+  --cl-grey: #8a8a8a;
   --cl-bg: #f9f9f3;
   --cl-shadow: rgba(0, 0, 0, 0.404);
 
@@ -86,4 +87,24 @@ code {
   // background-color: var(--cl-primary);
   background-color: var(--cl-primary);
   color: var(--cl-white);
+}
+
+// REMOVE SAFARI ZOOM
+select,
+textarea,
+input[type="text"],
+input[type="password"],
+input[type="datetime"],
+input[type="datetime-local"],
+input[type="date"],
+input[type="month"],
+input[type="time"],
+input[type="week"],
+input[type="number"],
+input[type="email"],
+input[type="url"],
+input[type="search"],
+input[type="tel"],
+input[type="color"] {
+  font-size: 16px !important;
 }

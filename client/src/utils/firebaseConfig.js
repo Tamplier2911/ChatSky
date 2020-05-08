@@ -17,6 +17,81 @@ const firebaseConfig = {
 
 firebase.initializeApp(firebaseConfig);
 
+/**
+ *
+ * @fileoverview
+ * MESSAGE ACTIONS
+ *
+ */
+
+export const createMessageInDB = async (messageDataObject) => {
+  // destructure required values from message data object
+  const {
+    user,
+    channel: { id },
+    messageContent,
+  } = messageDataObject;
+
+  // get messages collection reference
+  const messagesRef = firebase.database().ref("messages");
+
+  // create message object
+  const newMessage = {
+    user,
+    messageContent,
+    timestamp: firebase.database.ServerValue.TIMESTAMP,
+  };
+
+  // provide child to messages collection
+  // (key property, which we can find messages by - essential channel id) amd push it to DB
+  // then set new message object
+  await messagesRef.child(id).push().set(newMessage);
+
+  // End result structure:
+  /*
+  channelID
+      messageID
+          messageContent {
+             content,
+             media
+          }
+          timestamp 1588940746593
+          user {
+              id
+              displayname
+              avatar
+          }
+  */
+};
+
+export const loadAllMessagesFromDB = async (channelId) => {
+  // define collection to store results
+  const data = [];
+
+  // get messages collection ref
+  const messagesRef = firebase.database().ref("messages");
+
+  // promisify on child_added - return fulfilled data
+  // get access to message child by channelId
+  return new Promise((resolve, reject) => {
+    messagesRef.child(channelId).on(
+      "child_added",
+      (snap) => {
+        data.push(snap.val());
+        resolve(data);
+      },
+      reject
+    );
+  });
+};
+
+/**
+ *
+ * @fileoverview
+ * CHANNEL ACTIONS
+ *
+ */
+
 export const createChannelInDB = async (channelData) => {
   // destructure required values from channel data object
   const { createdBy, name, desc } = channelData;
@@ -37,6 +112,23 @@ export const createChannelInDB = async (channelData) => {
 
   // write new document into channels collection
   await channelsRef.child(key).update(newChannel);
+
+  // get messages collection reference
+  const messagesRef = firebase.database().ref("messages");
+
+  // create message object
+  const newMessage = {
+    user: createdBy,
+    messageContent: {
+      content: "Chat successfully created!",
+    },
+    timestamp: firebase.database.ServerValue.TIMESTAMP,
+  };
+
+  // provide child to messages collection
+  // (key property, which we can find messages by - essential channel id) amd push it to DB
+  // then set new message object
+  await messagesRef.child(key).push().set(newMessage);
 };
 
 export const loadAllChannelsFromDB = async () => {
@@ -47,13 +139,24 @@ export const loadAllChannelsFromDB = async () => {
   const channelsRef = firebase.database().ref("channels");
 
   // promisify on child_added - return fulfilled data
-  return new Promise((resolve, rejsect) => {
-    channelsRef.on("child_added", (snap) => {
-      data.push(snap.val());
-      resolve(data);
-    });
+  return new Promise((resolve, reject) => {
+    channelsRef.on(
+      "child_added",
+      (snap) => {
+        data.push(snap.val());
+        resolve(data);
+      },
+      reject
+    );
   });
 };
+
+/**
+ *
+ * @fileoverview
+ * USER ACTIONS
+ *
+ */
 
 export const saveUserToDB = async (createdUser) => {
   // desctructure required values from user object

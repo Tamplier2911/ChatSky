@@ -15,7 +15,7 @@ export const MessageFormContainer = styled.div`
   padding: 0 2rem;
 `;
 
-export const MessageFormElement = styled.div`
+export const MessageFormElement = styled.form`
   display: grid;
   grid-template-columns: min-content 1fr min-content;
   grid-auto-rows: min-content;
@@ -36,7 +36,7 @@ export const MessageFormTextInput = styled(TextField)`
   }
 
   & input {
-    font-size: 1.5rem !important;
+    // font-size: 1.5rem !important;
   }
 `;
 

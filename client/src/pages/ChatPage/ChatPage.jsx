@@ -3,6 +3,7 @@ import React from "react";
 
 // components
 import MessageBar from "../../components/MessageBar/MessageBar";
+import Messages from "../../components/Messages/Messages";
 
 // js rendering css
 import { ChatPageContainer } from "./ChatPageStyles";
@@ -10,7 +11,7 @@ import { ChatPageContainer } from "./ChatPageStyles";
 const ChatPage = () => {
   return (
     <ChatPageContainer>
-      <div>Chat Page</div>
+      <Messages />
       <MessageBar />
     </ChatPageContainer>
   );
