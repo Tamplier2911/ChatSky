@@ -7,6 +7,7 @@ import { createStructuredSelector } from "reselect";
 import {
   selectAllChannels,
   selectIsLoading,
+  selectCurrentChannel,
 } from "../../redux/channels/channels.selectors";
 import { openModal } from "../../redux/modal/modal.actions";
 import { loadAllChannelsStart } from "../../redux/channels/channels.actions";
@@ -25,10 +26,16 @@ import {
 
 const ChannelsCollectionWithSpinner = WithSpinner(ChannelsCollection);
 
-const Channels = ({ openModal, loadAllChannelsStart, channels, loading }) => {
+const Channels = ({
+  openModal,
+  loadAllChannelsStart,
+  channels,
+  currentChannel,
+  loading,
+}) => {
   useEffect(() => {
-    loadAllChannelsStart();
-  }, [loadAllChannelsStart]);
+    if (!currentChannel.id) loadAllChannelsStart();
+  }, [loadAllChannelsStart, currentChannel]);
 
   return (
     <ChannelsContainer pos={channels.length ? "top" : "center"}>
@@ -60,6 +67,7 @@ const Channels = ({ openModal, loadAllChannelsStart, channels, loading }) => {
 const mapStateToProps = createStructuredSelector({
   channels: selectAllChannels,
   loading: selectIsLoading,
+  currentChannel: selectCurrentChannel,
 });
 
 export default connect(mapStateToProps, { openModal, loadAllChannelsStart })(

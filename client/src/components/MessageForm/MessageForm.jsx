@@ -8,6 +8,7 @@ import { selectCurrentUser } from "../../redux/user/user.selectors";
 import { selectIsLoading } from "../../redux/messages/messages.selectors";
 import { selectCurrentChannel } from "../../redux/channels/channels.selectors";
 import { createOneMessageStart } from "../../redux/messages/messages.actions";
+import { openModal } from "../../redux/modal/modal.actions";
 
 // components
 import MediaInput from "../MediaInput/MediaInput";
@@ -23,7 +24,13 @@ import {
   MessageFormSendIcon,
 } from "./MessageFormStyles";
 
-const MessageForm = ({ user, channel, createOneMessageStart, isLoading }) => {
+const MessageForm = ({
+  user,
+  channel,
+  createOneMessageStart,
+  isLoading,
+  openModal,
+}) => {
   const [messageContent, setMessageContent] = useState({
     content: "",
     media: null,
@@ -39,7 +46,14 @@ const MessageForm = ({ user, channel, createOneMessageStart, isLoading }) => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    console.log("clicked!");
+    if (messageContent.media) {
+      const { media } = messageContent;
+      if (!media.type.startsWith("image/"))
+        return openModal({
+          title: "Attention!",
+          text: "File must be an image type.",
+        });
+    }
     createOneMessageStart({ messageContent, user, channel });
     setMessageContent({
       content: "",
@@ -93,4 +107,6 @@ const mapStateToProps = createStructuredSelector({
   isLoading: selectIsLoading,
 });
 
-export default connect(mapStateToProps, { createOneMessageStart })(MessageForm);
+export default connect(mapStateToProps, { createOneMessageStart, openModal })(
+  MessageForm
+);

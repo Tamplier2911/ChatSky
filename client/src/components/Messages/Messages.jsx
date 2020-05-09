@@ -32,6 +32,9 @@ const Messages = ({
     if (currentChannel.id) {
       loadAllMessagesStart(currentChannel.id);
     }
+    setTimeout(() => {
+      window.scrollTo(0, document.body.scrollHeight);
+    }, 500);
   }, [currentChannel, loadAllMessagesStart]);
   return (
     <MessagesContainer>

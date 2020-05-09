@@ -14,6 +14,8 @@ import {
   checkUserSessionFailure,
 } from "./user.actions";
 
+import { openModal } from "../modal/modal.actions";
+
 import { loadAllChannelsStart } from "../channels/channels.actions";
 
 import userActionTypes from "./user.types";
@@ -62,6 +64,7 @@ export function* emailSignIn(action) {
       yield put(emailSignInSuccess({ uid, email, displayName, photoURL }));
     }
   } catch (err) {
+    yield put(openModal({ title: "Unfortunately!", text: err.message }));
     yield put(emailSignInFailure(err.message));
   }
 }

@@ -1,3 +1,4 @@
+import { v4 as uuidv4 } from "uuid";
 import firebase from "firebase/app";
 import "firebase/auth";
 import "firebase/firestore";
@@ -31,6 +32,28 @@ export const createMessageInDB = async (messageDataObject) => {
     channel: { id },
     messageContent,
   } = messageDataObject;
+
+  if (messageContent.media) {
+    // get file
+    const file = messageContent.media;
+    // get hash for filename
+    const hash = uuidv4();
+    // get full filepath
+    const filePath = `chat/public/${hash}.jpg`;
+
+    // get storage reference
+    const storageRef = firebase.storage().ref();
+
+    // uploading the image to storage
+    // optionally can be store in uploadTaskSnapshot to track download %
+    await storageRef.child(filePath).put(file);
+
+    // get url where image can be referenced from
+    const url = await storageRef.child(filePath).getDownloadURL();
+
+    // set url of the image to message content media
+    messageContent.media = url;
+  }
 
   // get messages collection reference
   const messagesRef = firebase.database().ref("messages");

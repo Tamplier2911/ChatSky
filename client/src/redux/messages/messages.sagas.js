@@ -21,7 +21,7 @@ export function* createOneMessage(action) {
   try {
     yield call(createMessageInDB, { user, channel, messageContent });
     yield put(createOneMessageSuccess());
-    yield put(loadAllMessagesStart());
+    yield put(loadAllMessagesStart(channel.id));
   } catch (err) {
     yield put(createOneMessageFailure(err.message));
   }

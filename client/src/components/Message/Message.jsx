@@ -16,10 +16,12 @@ import {
   MessageName,
   MessageContent,
   MessageData,
+  MessageImgWrapper,
+  MessageImage,
 } from "./MessageStyles";
 
 const Message = ({
-  messageContent: { content },
+  messageContent: { content, media },
   timestamp,
   user: { displayName, photoURL, uid },
   userId,
@@ -38,6 +40,11 @@ const Message = ({
       <MessageDateWrap own={own}>
         <MessageData>{date}</MessageData>
       </MessageDateWrap>
+      {media ? (
+        <MessageImgWrapper>
+          <MessageImage alt={displayName + ", shared media"} src={media} />
+        </MessageImgWrapper>
+      ) : null}
     </MessageContainer>
   );
 };
