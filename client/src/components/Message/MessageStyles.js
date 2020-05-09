@@ -75,7 +75,6 @@ export const MessageData = styled.div`
 export const MessageImgWrapper = styled.div`
   justify-self: center;
   grid-area: 3 / 1 / 4 / 3;
-  border-radius: 0.5rem;
   overflow: hidden;
   padding-top: 1rem;
   width: 50%;
@@ -90,4 +89,5 @@ export const MessageImage = styled.img`
   height: 100%;
   display: block;
   object-fit: cover;
+  border-radius: 0.8rem;
 `;
