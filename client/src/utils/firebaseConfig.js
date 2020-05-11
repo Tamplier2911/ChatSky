@@ -174,6 +174,20 @@ export const loadAllChannelsFromDB = async () => {
   });
 };
 
+export const deleteOneChannelFromDB = async (channelId) => {
+  // get channels collection ref
+  const channelsRef = firebase.database().ref("channels");
+
+  // get messages collection ref
+  const messagesRef = firebase.database().ref("messages");
+
+  // remove channel doc from collection
+  await channelsRef.child(channelId).remove();
+
+  // remove set of messages from collection
+  await messagesRef.child(channelId).remove();
+};
+
 /**
  *
  * @fileoverview

@@ -7,6 +7,9 @@ const {
   LOAD_ALL_CHANNELS_START,
   LOAD_ALL_CHANNELS_SUCCESS,
   LOAD_ALL_CHANNELS_FAILURE,
+  DELETE_ONE_CHANNEL_START,
+  DELETE_ONE_CHANNEL_SUCCESS,
+  DELETE_ONE_CHANNEL_FAILURE,
   SET_CURRENT_CHANNEL,
 } = channelsTypes;
 
@@ -41,4 +44,17 @@ export const loadAllChannelsFailure = (errorMessage) => ({
 export const setCurrentChannel = (channel) => ({
   type: SET_CURRENT_CHANNEL,
   payload: channel,
+});
+
+export const deleteOneChannelStart = (channelId) => ({
+  type: DELETE_ONE_CHANNEL_START,
+  payload: channelId,
+});
+
+export const deleteOneChannelSuccess = () => ({
+  type: DELETE_ONE_CHANNEL_SUCCESS,
+});
+
+export const deleteOneChannelFailure = () => ({
+  type: DELETE_ONE_CHANNEL_FAILURE,
 });

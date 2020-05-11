@@ -3,6 +3,7 @@ import { takeLatest, put, all, call } from "redux-saga/effects";
 import {
   createChannelInDB,
   loadAllChannelsFromDB,
+  deleteOneChannelFromDB,
 } from "../../utils/firebaseConfig";
 
 import {
@@ -11,12 +12,18 @@ import {
   loadAllChannelsStart,
   loadAllChannelsSuccess,
   loadAllChannelsFailure,
+  deleteOneChannelSuccess,
+  deleteOneChannelFailure,
   setCurrentChannel,
 } from "./channels.actions";
 import { closeModal } from "../modal/modal.actions";
 
 import channelsTypes from "./channels.types";
-const { CREATE_NEW_CHANNEL_START, LOAD_ALL_CHANNELS_START } = channelsTypes;
+const {
+  CREATE_NEW_CHANNEL_START,
+  LOAD_ALL_CHANNELS_START,
+  DELETE_ONE_CHANNEL_START,
+} = channelsTypes;
 
 export function* createNewChannel(action) {
   const {
@@ -47,6 +54,17 @@ export function* loadAllChannels() {
   }
 }
 
+export function* deleteOneChannel({ payload }) {
+  console.log(payload, "from saga");
+  try {
+    yield call(deleteOneChannelFromDB, payload);
+    yield put(deleteOneChannelSuccess());
+    yield put(loadAllChannelsStart());
+  } catch (err) {
+    yield put(deleteOneChannelFailure(err.message));
+  }
+}
+
 export function* onCreateNewChannelStart() {
   yield takeLatest(CREATE_NEW_CHANNEL_START, createNewChannel);
 }
@@ -55,6 +73,14 @@ export function* onLoadAllChannelsStart() {
   yield takeLatest(LOAD_ALL_CHANNELS_START, loadAllChannels);
 }
 
+export function* onDeleteOneChannelStart() {
+  yield takeLatest(DELETE_ONE_CHANNEL_START, deleteOneChannel);
+}
+
 export function* channelsSagas() {
-  yield all([call(onCreateNewChannelStart), call(onLoadAllChannelsStart)]);
+  yield all([
+    call(onCreateNewChannelStart),
+    call(onLoadAllChannelsStart),
+    call(onDeleteOneChannelStart),
+  ]);
 }
