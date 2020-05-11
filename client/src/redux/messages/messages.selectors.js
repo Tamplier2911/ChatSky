@@ -11,3 +11,15 @@ export const selectIsLoading = createSelector(
   [selectMessages],
   (messages) => messages.isLoading
 );
+
+export const selectLengthOfChannelUniqueUsers = createSelector(
+  [selectAllMessages],
+  (allMessages) =>
+    allMessages.reduce(
+      (acc, message) =>
+        !acc.includes(message.user.displayName)
+          ? (acc.push(message.user.displayName), acc)
+          : acc,
+      []
+    ).length
+);

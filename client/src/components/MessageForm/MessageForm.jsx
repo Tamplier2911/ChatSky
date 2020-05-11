@@ -5,7 +5,10 @@ import React, { useState } from "react";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
 import { selectCurrentUser } from "../../redux/user/user.selectors";
-import { selectIsLoading } from "../../redux/messages/messages.selectors";
+import {
+  selectIsLoading,
+  selectLengthOfChannelUniqueUsers,
+} from "../../redux/messages/messages.selectors";
 import { selectCurrentChannel } from "../../redux/channels/channels.selectors";
 import { createOneMessageStart } from "../../redux/messages/messages.actions";
 import { openModal } from "../../redux/modal/modal.actions";
@@ -30,6 +33,7 @@ const MessageForm = ({
   createOneMessageStart,
   isLoading,
   openModal,
+  uniqueUsers,
 }) => {
   const [messageContent, setMessageContent] = useState({
     content: "",
@@ -61,6 +65,9 @@ const MessageForm = ({
     });
   };
 
+  // singualr or plural
+  const users = uniqueUsers > 1 ? "users" : "user";
+
   return (
     <MessageFormContainer>
       <MessageFormElement autoComplete="off" onSubmit={(e) => onSubmit(e)}>
@@ -70,11 +77,12 @@ const MessageForm = ({
           accept="image/*"
           type="file"
           id="message-media"
+          disabled={isLoading ? { disabled: true } : { disabled: false }}
           onChange={(e) => onInputChange(e)}
         />
         <MessageFormTextInput
           id="message-content"
-          label={user.displayName}
+          label={`${user.displayName} -- ${channel.name} -- ${uniqueUsers} ${users}`}
           name="content"
           value={content}
           required
@@ -105,6 +113,7 @@ const mapStateToProps = createStructuredSelector({
   user: selectCurrentUser,
   channel: selectCurrentChannel,
   isLoading: selectIsLoading,
+  uniqueUsers: selectLengthOfChannelUniqueUsers,
 });
 
 export default connect(mapStateToProps, { createOneMessageStart, openModal })(

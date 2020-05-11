@@ -9,7 +9,7 @@ import {
   MediaInputIcon,
 } from "./MediaInputStyles";
 
-const MediaInput = ({ label, id, ...otherProps }) => {
+const MediaInput = ({ label, id, disabled, ...otherProps }) => {
   return (
     <MediaInputContainer>
       <MediaInputElement id={id} {...otherProps} />
@@ -19,6 +19,7 @@ const MediaInput = ({ label, id, ...otherProps }) => {
             color="primary"
             aria-label="upload picture"
             component="span"
+            {...disabled}
           >
             <MediaInputIcon />
           </MediaInputButton>
