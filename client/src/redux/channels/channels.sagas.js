@@ -57,7 +57,9 @@ export function* loadAllChannels() {
 export function* deleteOneChannel({ payload }) {
   console.log(payload, "from saga");
   try {
-    yield call(deleteOneChannelFromDB, payload);
+    if (window.confirm("Are you sure, that you want to delete a channel?")) {
+      yield call(deleteOneChannelFromDB, payload);
+    }
     yield put(deleteOneChannelSuccess());
     yield put(loadAllChannelsStart());
   } catch (err) {

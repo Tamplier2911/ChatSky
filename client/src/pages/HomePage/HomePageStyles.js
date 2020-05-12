@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 export const HomePageContainer = styled.section`
+  position: relative;
   display: grid;
   align-content: center;
   justify-content: center;

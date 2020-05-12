@@ -4,6 +4,7 @@ import React from "react";
 // js rendering css
 import {
   LogoContainer,
+  LogoWrapper,
   LogoText,
   LogoTextLeft,
   LogoTextRight,
@@ -13,11 +14,13 @@ import {
 const Logo = ({ size }) => {
   return (
     <LogoContainer>
-      <LogoText size={size}>
-        <LogoTextLeft size={size}>Chat</LogoTextLeft>
-        <LogoTextRight>Sky</LogoTextRight>
-      </LogoText>
-      <LogoIconSVG size={size} />
+      <LogoWrapper>
+        <LogoText size={size}>
+          <LogoTextLeft size={size}>Chat</LogoTextLeft>
+          <LogoTextRight>Sky</LogoTextRight>
+        </LogoText>
+        <LogoIconSVG size={size} />
+      </LogoWrapper>
     </LogoContainer>
   );
 };

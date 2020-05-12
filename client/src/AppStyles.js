@@ -2,6 +2,7 @@ import styled from "styled-components";
 
 export const AppContainer = styled.div`
   position: relative;
+  overflow: hidden;
   display: grid;
   grid-template-rows: 1fr;
   grid-template-columns:

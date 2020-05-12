@@ -19,9 +19,9 @@ const getTextStyle = ({ size }) => {
 
 const getSVGStyle = ({ size }) => {
   if (size === "home") {
-    return `width: 9rem; height: 9rem;`;
+    return `width: 12rem; height: 12rem; justify-self: center;`;
   }
-  return ``;
+  return `justify-self: end;`;
 };
 
 const getTextColor = ({ size }) => {
@@ -32,7 +32,14 @@ const getTextColor = ({ size }) => {
 };
 
 export const LogoContainer = styled.div`
+  grid-area: 1 / 1 / 2 / 2;
   display: grid;
+`;
+
+export const LogoWrapper = styled.div`
+  display: grid;
+  align-items: center;
+  justify-items: center;
 `;
 
 export const LogoText = styled.div`
@@ -55,7 +62,7 @@ export const LogoTextRight = styled.span`
 
 export const LogoIconSVG = styled(LogoSVG)`
   grid-area: 1 / 1 / 2 / 2;
-  justify-self: end;
+
   width: 6rem;
   height: 6rem;
   ${getSVGStyle}

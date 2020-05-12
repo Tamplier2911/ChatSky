@@ -40,6 +40,11 @@ export const ModalContent = styled.div`
 
   animation: 0.3s hopIn;
   animation-fill-mode: backwards;
+
+  @media only screen and (max-width: 325px) {
+    min-height: 25rem;
+    min-width: 30rem;
+  }
 `;
 
 export const ModalClose = styled.span`

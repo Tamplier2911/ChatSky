@@ -1,4 +1,4 @@
-import "./SignupForm.scss";
+// import "./SignupForm.scss";
 import React, { useState } from "react";
 
 // redux
@@ -7,8 +7,14 @@ import { createStructuredSelector } from "reselect";
 import { selectUserLoading } from "../../redux/user/user.selectors";
 import { formSignupStart } from "../../redux/user/user.actions";
 
-// mui
-import { TextField, Typography, Button } from "@material-ui/core";
+// js render css
+import {
+  SignupFormContainer,
+  SignupFormElement,
+  SignupFormTitle,
+  SignupFormInput,
+  SignupFormSubmit,
+} from "./SignupFormStyles";
 
 const SignupForm = ({ formSignupStart, loading }) => {
   const [userCredentials, setUserCredentials] = useState({
@@ -52,14 +58,10 @@ const SignupForm = ({ formSignupStart, loading }) => {
   };
 
   return (
-    <div className="signupForm">
-      <Typography variant="h4">Create new account:</Typography>
-      <form
-        autoComplete="off"
-        onSubmit={(e) => onSubmit(e)}
-        className="signupForm__form"
-      >
-        <TextField
+    <SignupFormContainer>
+      <SignupFormTitle variant="h4">Create new account:</SignupFormTitle>
+      <SignupFormElement autoComplete="off" onSubmit={(e) => onSubmit(e)}>
+        <SignupFormInput
           id="signup-name"
           label="Name"
           required
@@ -67,9 +69,8 @@ const SignupForm = ({ formSignupStart, loading }) => {
           name="displayName"
           value={displayName}
           onChange={(e) => onInputChange(e)}
-          className="signupForm__input"
         />
-        <TextField
+        <SignupFormInput
           id="signup-email"
           label="Email"
           required
@@ -77,9 +78,8 @@ const SignupForm = ({ formSignupStart, loading }) => {
           name="email"
           value={email}
           onChange={(e) => onInputChange(e)}
-          className="signupForm__input"
         />
-        <TextField
+        <SignupFormInput
           id="signup-password"
           label="Password"
           required
@@ -87,9 +87,8 @@ const SignupForm = ({ formSignupStart, loading }) => {
           name="password"
           value={password}
           onChange={(e) => onInputChange(e)}
-          className="signupForm__input"
         />
-        <TextField
+        <SignupFormInput
           id="signup-passwordConfirm"
           label="Confirm Password"
           required
@@ -97,19 +96,16 @@ const SignupForm = ({ formSignupStart, loading }) => {
           name="passwordConfirm"
           value={passwordConfirm}
           onChange={(e) => onInputChange(e)}
-          className="signupForm__input"
         />
         {!loading ? (
-          <Button color="primary" className="signupForm__button" type="submit">
+          <SignupFormSubmit color="primary" type="submit">
             Sign Up
-          </Button>
+          </SignupFormSubmit>
         ) : (
-          <Button disabled className="signupForm__button">
-            Processing...
-          </Button>
+          <SignupFormSubmit disabled>Processing...</SignupFormSubmit>
         )}
-      </form>
-    </div>
+      </SignupFormElement>
+    </SignupFormContainer>
   );
 };
 
