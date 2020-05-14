@@ -29,7 +29,12 @@ if (process.env.NODE_ENV === "production") {
           res.setHeader("Cache-Control", "no-cache");
         } else if (hashRegExp.test(path)) {
           res.setHeader("Cache-Control", "max-age=31536000");
-        } else if (path.endsWith(".ico") || path.endsWith(".png")) {
+        } else if (
+          path.endsWith(".ico") ||
+          path.endsWith(".png") ||
+          path.endsWith(".jpg") ||
+          path.endsWith(".jpeg")
+        ) {
           res.setHeader("Cache-Control", "max-age=31536000");
         }
       },

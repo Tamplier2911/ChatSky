@@ -26,7 +26,7 @@ const Footer = ({ location, history, user, signUserOutStart }) => {
     <FooterContainer>
       <FooterNavigation>
         <FooterNavAction
-          label="Home"
+          // label="Home"
           value="home"
           onClick={() => {
             history.push("/");
@@ -34,7 +34,7 @@ const Footer = ({ location, history, user, signUserOutStart }) => {
           icon={<FooterNavHomeIcon path={path} />}
         />
         <FooterNavAction
-          label="Channels"
+          // label="Channels"
           value="channels"
           onClick={() => {
             history.push("/channels");
@@ -43,7 +43,7 @@ const Footer = ({ location, history, user, signUserOutStart }) => {
         />
         {user ? (
           <FooterNavAction
-            label="Logout"
+            // label="Logout"
             value="logout"
             onClick={(e) => {
               e.preventDefault();
@@ -53,7 +53,7 @@ const Footer = ({ location, history, user, signUserOutStart }) => {
           />
         ) : (
           <FooterNavAction
-            label="Login"
+            // label="Login"
             value="login"
             onClick={() => {
               history.push("/auth");
@@ -63,7 +63,7 @@ const Footer = ({ location, history, user, signUserOutStart }) => {
         )}
 
         <FooterNavAction
-          label="Chat"
+          // label="Chat"
           value="chat"
           onClick={() => {
             history.push("/chat");
