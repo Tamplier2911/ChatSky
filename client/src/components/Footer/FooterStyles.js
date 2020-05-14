@@ -97,9 +97,6 @@ export const FooterNavigation = styled(BottomNavigation)``;
 
 export const FooterNavAction = styled(BottomNavigationAction)`
   padding: 0 !important;
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
 
   &:hover
     ${FooterNavHomeIcon},

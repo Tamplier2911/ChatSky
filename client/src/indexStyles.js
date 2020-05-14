@@ -113,6 +113,19 @@ export const GlobalStyle = createGlobalStyle`
     }
 
     .MuiBottomNavigationAction-label {
-        font-size: 12px !important;
+        font-size: 16px !important;
+    }
+
+    .MuiBottomNavigationAction-wrapper {
+        grid-area: 1/1/2/2;
+        display: grid !important;
+
+        & svg {
+            grid-area: 1/1/2/2;
+        }
+
+        & span {
+            grid-area: 1/1/2/2;
+        }
     }
 `;
